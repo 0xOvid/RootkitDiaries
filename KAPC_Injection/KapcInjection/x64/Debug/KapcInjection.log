@@ -1,0 +1,23 @@
+﻿  Building 'KapcInjection' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Debug\KapcInjection.inf
+  Stamping [Version] section with DriverVer=01/30/2024,22.54.32.495
+  driver.c
+  KapcInjection.vcxproj -> E:\ProjectUr0bUr()s\KapcInjection\x64\Debug\KapcInjection.sys
+  Done Adding Additional Store
+  Successfully signed: E:\ProjectUr0bUr()s\KapcInjection\x64\Debug\KapcInjection.sys
+  
+  Driver is 'Universal'.
+  ........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  E:\ProjectUr0bUr()s\KapcInjection\x64\Debug\KapcInjection\kapcinjection.cat
+  Done Adding Additional Store
+  Successfully signed: E:\ProjectUr0bUr()s\KapcInjection\x64\Debug\KapcInjection\kapcinjection.cat
+  

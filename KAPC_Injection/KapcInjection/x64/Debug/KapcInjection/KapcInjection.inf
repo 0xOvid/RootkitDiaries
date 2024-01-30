@@ -1,0 +1,80 @@
+;
+; KapcInjection.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System ; TODO: specify appropriate Class
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=KapcInjection.cat
+DriverVer = 01/30/2024,22.54.32.495
+PnpLockdown=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+KapcInjection_Device_CoInstaller_CopyFiles = 11
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+KapcInjection.sys  = 1,,
+;
+
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+%KapcInjection.DeviceDesc%=KapcInjection_Device, Root\KapcInjection ; TODO: edit hw-id
+
+[KapcInjection_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+KapcInjection.sys
+
+;-------------- Service installation
+[KapcInjection_Device.NT.Services]
+AddService = KapcInjection,%SPSVCINST_ASSOCSERVICE%, KapcInjection_Service_Inst
+
+; -------------- KapcInjection driver install sections
+[KapcInjection_Service_Inst]
+DisplayName    = %KapcInjection.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\KapcInjection.sys
+
+;
+;--- KapcInjection_Device Coinstaller installation ------
+;
+
+[KapcInjection_Device.NT.CoInstallers]
+AddReg=KapcInjection_Device_CoInstaller_AddReg
+CopyFiles=KapcInjection_Device_CoInstaller_CopyFiles
+
+[KapcInjection_Device_CoInstaller_AddReg]
+;
+
+
+[KapcInjection_Device_CoInstaller_CopyFiles]
+;
+
+
+[KapcInjection_Device.NT.Wdf]
+KmdfService =  KapcInjection, KapcInjection_wdfsect
+[KapcInjection_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "KapcInjection Installation Disk"
+KapcInjection.DeviceDesc = "KapcInjection Device"
+KapcInjection.SVCDESC = "KapcInjection Service"
